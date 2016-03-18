@@ -10,8 +10,18 @@ class Telas_model extends CI_Model {
     }
   }
 
-  public function getClientes(){
+  public function getAllClientes(){
     return $this->db->get('clientes');
+  }
+
+  public function getById($idCliente=NULL){
+    if($idCliente==NULL){
+        return FALSE;
+    }else{
+        $this->db->where('idclientes', $idCliente);
+        return $this->db->get('clientes');
+    }
+
   }
 
 }

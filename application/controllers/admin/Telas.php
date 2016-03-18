@@ -55,7 +55,7 @@ class Telas extends CI_Controller {
       }
     }
 
-    $dados['clientes'] = $this->telas->getClientes()->result();
+    $dados['clientes'] = $this->telas->getAllClientes()->result();
 
 
     $this->load->view('templates/header');
@@ -68,11 +68,17 @@ class Telas extends CI_Controller {
 
   public function updateCliente($id){
 
-    
+    if($id==NULL){
+      redirect(base_url('admin/Telas/cadastroCliente'));
+    }
+
+    $dados['cliente'] = $this->telas->getById($id)->result();
+    // var_dump($dados);
+    // die();
 
     $this->load->view('templates/header');
     $this->load->view('templates/menuUpLeft');
-    $this->load->view('admin/updateCliente');
+    $this->load->view('admin/updateCliente', $dados);
     $this->load->view('templates/footer');
   }
 
