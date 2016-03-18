@@ -3,8 +3,8 @@
   <div class="ui divider"></div>
   <br/>
   <div class="ui grid">
-  <div class="four column centered row">
-    <?php
+    <div class="four column centered row">
+      <?php
 
       //echo validation_errors('<div class="ui red label"><span>', '</span></div>');
       if($this->session->flashdata('updateOk')){
@@ -14,9 +14,9 @@
         echo '<div class="ui green label"><span>'.$this->session->flashdata('updateFail').'</span></div>';
       }
 
-    ?>
+      ?>
+    </div>
   </div>
-</div>
   <br/>
   <br/>
   <form class="ui form" action="<?php echo base_url('admin/Telas/updateCliente/'.$cliente->idclientes) ?>" method="post">
@@ -37,34 +37,34 @@
         </div>
       </div>
       <div class="three fields">
-      <div class="field">
-        <label>CPF</label>
         <div class="field">
-          <input type="text" name="cpf" placeholder="CPF" value="<?php echo set_value('cpf', $cliente->cpf); ?>" disabled>
-          <br/>
-          <br/>
-          <?php echo form_error('cpf', '<div class="ui red label"><span>', '</span></div>'); ?>
+          <label>CPF</label>
+          <div class="field">
+            <input type="text" name="cpf" placeholder="CPF" value="<?php echo set_value('cpf', $cliente->cpf); ?>" disabled>
+            <br/>
+            <br/>
+            <?php echo form_error('cpf', '<div class="ui red label"><span>', '</span></div>'); ?>
+          </div>
+        </div>
+        <div class="field">
+          <label>Telefone Fixo</label>
+          <div class="field">
+            <input type="text" name="fixo" placeholder="Fixo" value="<?php echo set_value('fixo', $cliente->fixo); ?>">
+            <br/>
+            <br/>
+            <?php echo form_error('fixo', '<div class="ui red label"><span>', '</span></div>'); ?>
+          </div>
+        </div>
+        <div class="field">
+          <label>Celular</label>
+          <div class="field">
+            <input type="text" name="celular" placeholder="Celular" value="<?php echo set_value('celular', $cliente->celular); ?>">
+            <br/>
+            <br/>
+            <?php echo form_error('celular', '<div class="ui red label"><span>', '</span></div>'); ?>
+          </div>
         </div>
       </div>
-      <div class="field">
-        <label>Telefone Fixo</label>
-        <div class="field">
-          <input type="text" name="fixo" placeholder="Fixo" value="<?php echo set_value('fixo', $cliente->fixo); ?>">
-          <br/>
-          <br/>
-          <?php echo form_error('fixo', '<div class="ui red label"><span>', '</span></div>'); ?>
-        </div>
-      </div>
-      <div class="field">
-        <label>Celular</label>
-        <div class="field">
-          <input type="text" name="celular" placeholder="Celular" value="<?php echo set_value('celular', $cliente->celular); ?>">
-          <br/>
-          <br/>
-          <?php echo form_error('celular', '<div class="ui red label"><span>', '</span></div>'); ?>
-        </div>
-      </div>
-    </div>
     </div>
     <div class="field">
       <label>Endereço de Entrega</label>
@@ -122,5 +122,5 @@
     </div>
     <input type="submit" class="ui grey button" tabindex="0" value="Atualizar Cadastro">
   </form>
-    <br/>
-    <a href="<?php echo base_url('admin/Telas/cadastroCliente') ?>"><button class="ui grey button" tabindex="0" value="voltar">Voltar</button></a>
+  <br/>
+  <a href="<?php echo base_url('admin/Telas/cadastroCliente') ?>"><button class="ui grey button" tabindex="0" value="voltar">Voltar</button></a>
