@@ -128,8 +128,6 @@ class Telas extends CI_Controller {
           $this->session->set_flashdata('deleteFail', 'Ocorreu um erro no processo de exclusão');
       }
 
-      redirect(base_url('admin/Telas/cadastroCliente'));
-
     }else if($this->input->post('nao')){
       redirect(base_url('admin/Telas/cadastroCliente'));
     }
