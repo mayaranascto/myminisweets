@@ -131,6 +131,12 @@
       if($this->session->flashdata('cadastroFail')){
         echo '<div class="ui green label"><span>'.$this->session->flashdata('cadastroFail').'</span></div>';
       }
+      if($this->session->flashdata('deleteOk')){
+        echo '<div class="ui green label"><span>'.$this->session->flashdata('deleteOk').'</span></div>';
+      }
+      if($this->session->flashdata('deleteFail')){
+        echo '<div class="ui green label"><span>'.$this->session->flashdata('deleteFail').'</span></div>';
+      }
 
     ?>
   </div>

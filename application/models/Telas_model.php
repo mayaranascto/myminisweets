@@ -22,7 +22,6 @@ class Telas_model extends CI_Model {
         $this->db->where('idclientes', $idCliente);
         return $this->db->get('clientes');
     }
-
   }
 
   public function alterarCliente($idCliente=NULL, $data=NULL){
@@ -33,6 +32,17 @@ class Telas_model extends CI_Model {
       $this->db->update('clientes', $data);
       return TRUE;
     }
+  }
+
+  public function excluirCliente($idcliente=NULL){
+    if($idcliente!=NULL){
+      $this->db->where('idclientes', $idcliente);
+      $this->db->delete('clientes');
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+
   }
 
 }

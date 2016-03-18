@@ -115,9 +115,30 @@ class Telas extends CI_Controller {
   }
 
   public function deleteCliente($id){
+
+    if($id==NULL){
+      redirect(base_url('admin/Telas/cadastroCliente'));
+    }
+
+    if($this->input->post('sim')){
+      if($this->telas->excluirCliente($id)){
+          $this->telas->excluirCliente($id);
+          $this->session->set_flashdata('deleteOk', 'O Cliente foi excluído com sucesso');
+      }else{
+          $this->session->set_flashdata('deleteFail', 'Ocorreu um erro no processo de exclusão');
+      }
+
+      redirect(base_url('admin/Telas/cadastroCliente'));
+
+    }else if($this->input->post('nao')){
+      redirect(base_url('admin/Telas/cadastroCliente'));
+    }
+
+    $dados['cliente'] = $this->telas->getById($id)->row();
+
     $this->load->view('templates/header');
     $this->load->view('templates/menuUpLeft');
-    $this->load->view('admin/deleteCliente');
+    $this->load->view('admin/deleteCliente', $dados);
     $this->load->view('templates/footer');
   }
 
