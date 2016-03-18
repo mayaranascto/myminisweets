@@ -11,6 +11,7 @@ class Telas_model extends CI_Model {
   }
 
   public function getAllClientes(){
+    $this->db->order_by('idclientes', 'name ASC');
     return $this->db->get('clientes');
   }
 
@@ -22,6 +23,16 @@ class Telas_model extends CI_Model {
         return $this->db->get('clientes');
     }
 
+  }
+
+  public function alterarCliente($idCliente=NULL, $data=NULL){
+    if($idCliente==NULL || $data==NULL){
+      return FALSE;
+    }else{
+      $this->db->where('idclientes', $idCliente);
+      $this->db->update('clientes', $data);
+      return TRUE;
+    }
   }
 
 }

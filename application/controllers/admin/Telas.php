@@ -72,9 +72,41 @@ class Telas extends CI_Controller {
       redirect(base_url('admin/Telas/cadastroCliente'));
     }
 
-    $dados['cliente'] = $this->telas->getById($id)->result();
-    // var_dump($dados);
-    // die();
+    if($this->input->post()){
+      $this->form_validation->set_message('required', 'O campo %s é obrigatório');
+      //$this->form_validation->set_message('is_unique', 'Esse CPF já se encontra cadastrado no nosso sistema');
+
+      $this->form_validation->set_rules('primeiro_nome', 'Primeiro Nome', 'required|trim');
+      $this->form_validation->set_rules('ultimo_nome', 'Último Nome', 'required|trim');
+      //$this->form_validation->set_rules('cpf', 'CPF', 'required|trim|is_unique[clientes.cpf]');
+      $this->form_validation->set_rules('fixo', 'Telefone Fixo', 'trim');
+      $this->form_validation->set_rules('celular', 'Celular', 'required|trim');
+      $this->form_validation->set_rules('rua', 'Rua', 'required|trim');
+      $this->form_validation->set_rules('num_casa', 'Número', 'required|trim');
+      $this->form_validation->set_rules('bairro', 'Bairro', 'required|trim');
+      $this->form_validation->set_rules('complemento', 'complemento', 'trim');
+      $this->form_validation->set_rules('cidade', 'Cidade', 'required|trim');
+      $this->form_validation->set_rules('cep', 'CEP', 'required|trim');
+      //$this->form_validation->set_rules('login', 'Login', 'required|trim');
+      //$this->form_validation->set_rules('senha', 'Senha', 'required|trim');
+      //$this->form_validation->set_rules('repita_senha', 'Repita Senha', 'required|trim');
+
+      if($this->form_validation->run()==TRUE){
+
+
+        $data = elements(array('primeiro_nome', 'ultimo_nome', 'fixo', 'celular', 'rua', 'num_casa', 'bairro', 'complemento', 'cidade', 'cep'), $this->input->post());
+        // var_dump($data);
+        // die();
+        if($this->telas->alterarCliente($id,$data)){
+          $this->session->set_flashdata('updateOk', 'O Cliente foi cadastrado com sucesso');
+        }else{
+          $this->session->set_flashdata('updateFail', 'Ocorreu um erro com o cadastro');
+        }
+
+      }
+    }
+
+    $dados['cliente'] = $this->telas->getById($id)->row();
 
     $this->load->view('templates/header');
     $this->load->view('templates/menuUpLeft');
