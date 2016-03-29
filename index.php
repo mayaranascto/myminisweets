@@ -218,6 +218,12 @@ switch (ENVIRONMENT)
  *  Now that we know the path, set the main path constants
  * -------------------------------------------------------------------
  */
+
+	define('DS', DIRECTORY_SEPARATOR);
+
+	//Path Default
+	define('PATHDEFAULT', dirname(__FILE__).DS);
+
 	// The name of THIS file
 	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 

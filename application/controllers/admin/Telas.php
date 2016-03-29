@@ -11,6 +11,7 @@ class Telas extends CI_Controller {
     $this->load->helper('form');
     $this->load->library('table');
     $this->load->helper('url');
+    $this->load->helper('html');
 }
 
   public function index(){
@@ -60,8 +61,8 @@ class Telas extends CI_Controller {
 
     $this->load->view('templates/header');
     $this->load->view('templates/menuUpLeft');
-    $this->load->view('admin/cadastroCliente');
-    $this->load->view('admin/selectCliente', $dados);
+    $this->load->view('admin/clientes/cadastroCliente');
+    $this->load->view('admin/clientes/selectCliente', $dados);
     $this->load->view('templates/footer');
 
   }
@@ -110,7 +111,7 @@ class Telas extends CI_Controller {
 
     $this->load->view('templates/header');
     $this->load->view('templates/menuUpLeft');
-    $this->load->view('admin/updateCliente', $dados);
+    $this->load->view('admin/clientes/updateCliente', $dados);
     $this->load->view('templates/footer');
   }
 
@@ -136,14 +137,90 @@ class Telas extends CI_Controller {
 
     $this->load->view('templates/header');
     $this->load->view('templates/menuUpLeft');
-    $this->load->view('admin/deleteCliente', $dados);
+    $this->load->view('admin/clientes/deleteCliente', $dados);
     $this->load->view('templates/footer');
   }
 
   public function cadastroProduto(){
+
+    if($this->input->post()){
+
+      $this->form_validation->set_message('required', 'O campo %s é obrigatório');
+
+      $this->form_validation->set_rules('nome_produto', 'Nome', 'required|trim');
+      $this->form_validation->set_rules('descricao', 'Descrição', 'required|trim');
+      $this->form_validation->set_rules('preco', 'Preço', 'required|trim');
+      if($_FILES['img_url']['size']==0){
+        $this->form_validation->set_rules('img_url', 'Imagem do Produto', 'required');
+      }
+
+      if($this->form_validation->run()==TRUE){
+        $data = elements(array('nome_produto', 'descricao', 'preco'), $this->input->post());
+
+        $config['upload_path']          = PATHDEFAULT.'assets'.DS.'img'.DS.'produtos';
+        $config['allowed_types']        = 'gif|jpg|png';
+
+        $this->load->library('upload', $config);
+        if($this->upload->do_upload('img_url')){
+          $data['img_url'] = $this->upload->data('file_name');
+        }
+
+        if($this->telas->cadastroProduto($data)){
+            $this->session->set_flashdata('cadastroOk', 'O Produto foi cadastrado com sucesso');
+        }else{
+          $this->session->set_flashdata('cadastroFail', 'Ocorreu um erro com o cadastro');
+        }
+      }
+    }
+
+    $dados['produtos'] = $this->telas->getAllProducts()->result();
+
     $this->load->view('templates/header');
     $this->load->view('templates/menuUpLeft');
-    $this->load->view('admin/cadastroProduto');
+    $this->load->view('admin/produtos/cadastroProduto');
+    $this->load->view('admin/produtos/selectProduto', $dados);
+    $this->load->view('templates/footer');
+  }
+
+  public function verProduto($idProduto){
+
+    if($idProduto==NULL){
+      redirect(base_url('admin/Telas/cadastroProduto'));
+    }
+
+    $dados['produto'] = $this->telas->getProductById($idProduto)->row();
+
+    $this->load->view('templates/header');
+    $this->load->view('templates/menuUpLeft');
+    $this->load->view('admin/produtos/verProduto', $dados);
+    $this->load->view('templates/footer');
+  }
+
+  public function updateProduto($idProduto){
+
+    if($idProduto==NULL){
+      redirect(base_url('admin/Telas/cadastroProduto'));
+    }
+
+    if($this->input->post()){
+
+      $this->form_validation->set_message('required', 'O campo %s é obrigatório');
+
+      $this->form_validation->set_rules('nome_produto', 'Nome', 'required|trim');
+      $this->form_validation->set_rules('descricao', 'Descrição', 'required|trim');
+      $this->form_validation->set_rules('preco', 'Preço', 'required|trim');
+      if($_FILES['img_url']['size']==0){
+        $this->form_validation->set_rules('img_url', 'Imagem do Produto', 'required');
+      }
+
+
+    }
+
+    $dados['produto'] = $this->telas->getProductById($idProduto)->row();
+
+    $this->load->view('templates/header');
+    $this->load->view('templates/menuUpLeft');
+    $this->load->view('admin/produtos/updateProduto', $dados);
     $this->load->view('templates/footer');
   }
 

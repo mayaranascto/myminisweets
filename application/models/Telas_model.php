@@ -42,7 +42,27 @@ class Telas_model extends CI_Model {
     }else{
       return FALSE;
     }
+  }
 
+  public function cadastroProduto($data=NULL){
+    if($data!=NULL){
+      if($this->db->insert('produtos', $data)) return TRUE;
+      return FALSE;
+    }
+  }
+
+  public function getAllProducts(){
+    $this->db->order_by('nome_produto', 'name ASC');
+    return $this->db->get('produtos');
+  }
+
+  public function getProductById($idProduto=NULL){
+    if($idProduto!=NULL){
+      $this->db->where('idprodutos', $idProduto);
+      return $this->db->get('produtos');
+    }else{
+      return FALSE;
+    }
   }
 
 }
