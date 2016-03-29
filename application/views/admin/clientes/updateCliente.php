@@ -6,7 +6,6 @@
     <div class="four column centered row">
       <?php
 
-      //echo validation_errors('<div class="ui red label"><span>', '</span></div>');
       if($this->session->flashdata('updateOk')){
         echo '<div class="ui green label"><span>'.$this->session->flashdata('updateOk').'</span></div>';
       }

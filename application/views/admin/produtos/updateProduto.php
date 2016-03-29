@@ -1,31 +1,9 @@
 <div class="twelve wide column">
   <h2>Atualizar Produto</h2>
   <div class="ui divider"></div>
-
-  <div class="ui grid">
-    <div class="four column centered row">
-      <?php
-
-        //echo validation_errors('<div class="ui red label"><span>', '</span></div>');
-        if($this->session->flashdata('cadastroOk')){
-          echo '<div class="ui green label"><span>'.$this->session->flashdata('cadastroOk').'</span></div>';
-        }
-        if($this->session->flashdata('cadastroFail')){
-          echo '<div class="ui green label"><span>'.$this->session->flashdata('cadastroFail').'</span></div>';
-        }
-        // if($this->session->flashdata('deleteOk')){
-        //   echo '<div class="ui green label"><span>'.$this->session->flashdata('deleteOk').'</span></div>';
-        // }
-        // if($this->session->flashdata('deleteFail')){
-        //   echo '<div class="ui green label"><span>'.$this->session->flashdata('deleteFail').'</span></div>';
-        // }
-
-      ?>
-    </div>
-  </div>
   <br/>
 
-  <form class="ui form" action="<?php echo base_url('admin/Telas/cadastroProduto') ?>" method="post" enctype="multipart/form-data">
+  <form class="ui form" action="<?php echo base_url('admin/Telas/updateProduto/'.$produto->idprodutos) ?>" method="post" enctype="multipart/form-data">
     <div class="field">
       <label>Nome do Produto</label>
       <input type="text" name="nome_produto" placeholder="Nome" value="<?php echo set_value('nome_produto', $produto->nome_produto); ?>">
@@ -36,7 +14,7 @@
     <div class="field">
       <label>Descrição do Produto</label>
       <div class="field">
-        <input type="text" name="descricao" placeholder="Descrição" value="<?php echo set_value('nome_produto', $produto->descricao); ?>">
+        <input type="text" name="descricao" placeholder="Descrição" value="<?php echo set_value('descricao', $produto->descricao); ?>">
         <br/>
         <br/>
         <?php echo form_error('descricao', '<div class="ui red label"><span>', '</span></div>'); ?>
@@ -47,7 +25,7 @@
         <label>Preço</label>
         <div class="ui labeled input">
           <div class="ui label">$</div>
-          <input type="text" name="preco" placeholder="Preço" value="<?php echo set_value('nome_produto', $produto->preco); ?>">
+          <input type="text" name="preco" placeholder="Preço" value="<?php echo set_value('preco', $produto->preco); ?>">
         </div>
       </div>
       <div class="eight wide field">

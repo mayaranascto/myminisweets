@@ -65,4 +65,24 @@ class Telas_model extends CI_Model {
     }
   }
 
+  public function updateProduto($idProduto, $data){
+    if($idProduto==NULL || $data==NULL){
+      return FALSE;
+    }else{
+      $this->db->where('idprodutos', $idProduto);
+      $this->db->update('produtos', $data);
+      return TRUE;
+    }
+  }
+
+  public function deleteProduto($idProduto){
+    if($idProduto!=NULL){
+      $this->db->where('idprodutos', $idProduto);
+      $this->db->delete('produtos');
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+
 }

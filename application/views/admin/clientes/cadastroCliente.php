@@ -124,20 +124,16 @@
   <div class="four column centered row">
     <?php
 
-      //echo validation_errors('<div class="ui red label"><span>', '</span></div>');
       if($this->session->flashdata('cadastroOk')){
         echo '<div class="ui green label"><span>'.$this->session->flashdata('cadastroOk').'</span></div>';
-      }
-      if($this->session->flashdata('cadastroFail')){
+      }elseif($this->session->flashdata('cadastroFail')){
         echo '<div class="ui green label"><span>'.$this->session->flashdata('cadastroFail').'</span></div>';
       }
       if($this->session->flashdata('deleteOk')){
         echo '<div class="ui green label"><span>'.$this->session->flashdata('deleteOk').'</span></div>';
-      }
-      if($this->session->flashdata('deleteFail')){
+      }elseif($this->session->flashdata('deleteFail')){
         echo '<div class="ui green label"><span>'.$this->session->flashdata('deleteFail').'</span></div>';
       }
-
     ?>
   </div>
 </div>

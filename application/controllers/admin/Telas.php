@@ -125,8 +125,10 @@ class Telas extends CI_Controller {
       if($this->telas->excluirCliente($id)){
           $this->telas->excluirCliente($id);
           $this->session->set_flashdata('deleteOk', 'O Cliente foi excluído com sucesso');
+          redirect('admin/Telas/cadastroCliente');
       }else{
           $this->session->set_flashdata('deleteFail', 'Ocorreu um erro no processo de exclusão');
+          redirect('admin/Telas/cadastroCliente');
       }
 
     }else if($this->input->post('nao')){
@@ -166,7 +168,7 @@ class Telas extends CI_Controller {
         }
 
         if($this->telas->cadastroProduto($data)){
-            $this->session->set_flashdata('cadastroOk', 'O Produto foi cadastrado com sucesso');
+          $this->session->set_flashdata('cadastroOk', 'O Produto foi cadastrado com sucesso');
         }else{
           $this->session->set_flashdata('cadastroFail', 'Ocorreu um erro com o cadastro');
         }
@@ -209,11 +211,26 @@ class Telas extends CI_Controller {
       $this->form_validation->set_rules('nome_produto', 'Nome', 'required|trim');
       $this->form_validation->set_rules('descricao', 'Descrição', 'required|trim');
       $this->form_validation->set_rules('preco', 'Preço', 'required|trim');
-      if($_FILES['img_url']['size']==0){
-        $this->form_validation->set_rules('img_url', 'Imagem do Produto', 'required');
+
+      if($this->form_validation->run()==TRUE){
+        $data = elements(array('nome_produto', 'descricao', 'preco'), $this->input->post());
+
+        $config['upload_path']          = PATHDEFAULT.'assets'.DS.'img'.DS.'produtos';
+        $config['allowed_types']        = 'gif|jpg|png';
+
+        $this->load->library('upload', $config);
+        if($this->upload->do_upload('img_url')){
+          $data['img_url'] = $this->upload->data('file_name');
+        }
+
+        if($this->telas->updateProduto($idProduto, $data)){
+          $this->session->set_flashdata('updateOk', 'O produto foi atualizado com sucesso');
+          redirect(base_url('admin/Telas/cadastroProduto'));
+        }else{
+          $this->session->set_flashdata('updateFail', 'Ocorreu um erro com a atualização');
+          redirect(base_url('admin/Telas/cadastroProduto'));
+        }
       }
-
-
     }
 
     $dados['produto'] = $this->telas->getProductById($idProduto)->row();
@@ -222,6 +239,35 @@ class Telas extends CI_Controller {
     $this->load->view('templates/menuUpLeft');
     $this->load->view('admin/produtos/updateProduto', $dados);
     $this->load->view('templates/footer');
+  }
+
+  public function deleteProduto($idProduto){
+
+    if($idProduto==NULL){
+      redirect('admin/Telas/cadastroProduto');
+    }
+
+    if($this->input->post('sim')){
+      if($this->telas->deleteProduto($idProduto)){
+        $this->telas->deleteProduto($idProduto);
+        $this->session->set_flashdata('deleteOk', 'O produto foi excluido com sucesso');
+        redirect('admin/Telas/cadastroProduto');
+      }else{
+        $this->session->set_flashdata('deleteFail', 'Ocorreu um erro na exclusão do produto');
+        redirect('admin/Telas/cadastroProduto');
+      }
+
+    }elseif($this->input->post('nao')){
+      redirect('admin/Telas/cadastroProduto');
+    }
+
+    $dados['produto'] = $this->telas->getProductById($idProduto)->row();
+
+    $this->load->view('templates/header');
+    $this->load->view('templates/menuUpLeft');
+    $this->load->view('admin/produtos/deleteProduto', $dados);
+    $this->load->view('templates/footer');
+
   }
 
 }
