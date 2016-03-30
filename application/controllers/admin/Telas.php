@@ -25,7 +25,7 @@ class Telas extends CI_Controller {
     if($this->input->post()){
 
       $this->form_validation->set_message('required', 'O campo %s é obrigatório');
-      $this->form_validation->set_message('is_unique', 'Esse CPF já se encontra cadastrado no nosso sistema');
+      $this->form_validation->set_message('is_unique', 'Esse %s já se encontra cadastrado no nosso sistema');
 
       $this->form_validation->set_rules('primeiro_nome', 'Primeiro Nome', 'required|trim');
       $this->form_validation->set_rules('ultimo_nome', 'Último Nome', 'required|trim');
@@ -38,7 +38,7 @@ class Telas extends CI_Controller {
       $this->form_validation->set_rules('complemento', 'complemento', 'trim');
       $this->form_validation->set_rules('cidade', 'Cidade', 'required|trim');
       $this->form_validation->set_rules('cep', 'CEP', 'required|trim');
-      $this->form_validation->set_rules('login', 'Login', 'required|trim');
+      $this->form_validation->set_rules('login', 'Login', 'required|trim|is_unique[clientes.login]');
       $this->form_validation->set_rules('senha', 'Senha', 'required|trim');
       $this->form_validation->set_rules('repita_senha', 'Repita Senha', 'required|trim');
 

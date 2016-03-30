@@ -34,5 +34,13 @@ Friends
       <a class="item" href="<?php echo base_url('admin/Telas/cadastroProduto') ?>">
         Produtos
       </a>
+      <div class="ui simple dropdown item">
+        <i class="dropdown icon"></i>
+        Pedidos
+        <div class="menu">
+          <a class="item">Criar Pedido</a>
+          <a class="item">Gerenciar Pedidos</a>
+        </div>
+      </div>
     </div>
   </div>
