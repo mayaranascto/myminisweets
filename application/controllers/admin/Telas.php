@@ -12,6 +12,7 @@ class Telas extends CI_Controller {
     $this->load->library('table');
     $this->load->helper('url');
     $this->load->helper('html');
+    $this->auth->validarAuth(base_url('admin'));
 }
 
   public function index(){

@@ -1,7 +1,7 @@
 <div class="ui container">
   <br>
   <div class="ui secondary menu">
-    <div class="header item">Bem Vindo "login do usuário"</div>
+    <div class="header item"><?php echo $this->auth->getLogin(); ?></div>
     <!--<a class="item">
     Home
   </a>
@@ -18,7 +18,7 @@ Friends
   <i class="search link icon"></i>
 </div>
 </div>-->
-<a class="ui item">
+<a class="ui item" href="<?php echo base_url('admin/Login/logout'); ?>">
   Sair
 </a>
 </div>
