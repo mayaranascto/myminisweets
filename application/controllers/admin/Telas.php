@@ -5,6 +5,7 @@ class Telas extends CI_Controller {
 
   public function __construct(){
     parent::__construct();
+    $this->auth->validarAuth(base_url('admin/Login'));
     $this->load->model('Telas_model', 'telas');
     $this->load->helper('array');
     $this->load->library('form_validation');
@@ -12,7 +13,6 @@ class Telas extends CI_Controller {
     $this->load->library('table');
     $this->load->helper('url');
     $this->load->helper('html');
-    $this->auth->validarAuth(base_url('admin'));
 }
 
   public function index(){

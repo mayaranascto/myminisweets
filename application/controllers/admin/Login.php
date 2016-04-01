@@ -24,6 +24,7 @@ class Login extends CI_Controller {
       }else{
         $senha = md5($this->input->post('senha'));
       }
+
       if($this->login->verificaDados($login, $senha)){
           $this->auth->criarAuth($login);
           redirect('admin/Telas');

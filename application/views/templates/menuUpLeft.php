@@ -1,7 +1,7 @@
 <div class="ui container">
   <br>
   <div class="ui secondary menu">
-    <div class="header item"><?php echo $this->auth->getLogin(); ?></div>
+    <div class="header item"><?php echo 'Bem vindo '.$this->auth->getLogin(); ?></div>
     <!--<a class="item">
     Home
   </a>
@@ -38,8 +38,8 @@ Friends
         <i class="dropdown icon"></i>
         Pedidos
         <div class="menu">
-          <a class="item">Criar Pedido</a>
-          <a class="item">Gerenciar Pedidos</a>
+          <a class="item" href="<?php echo base_url('admin/Pedidos/criarPedido'); ?>">Criar Pedido</a>
+          <a class="item" href="<?php echo base_url('admin/Pedidos/gerenciarPedidos'); ?>">Gerenciar Pedidos</a>
         </div>
       </div>
     </div>
