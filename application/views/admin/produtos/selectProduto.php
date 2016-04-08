@@ -1,7 +1,6 @@
 <br/>
 <br/>
 <h2>Lista de Produtos</h2>
-<div class="ui divider"></div>
 <br/>
   <?php
 
@@ -18,7 +17,7 @@
 
     echo $this->table->generate();
   ?>
-
+<br/>
 </div>
 </div>
 </div>

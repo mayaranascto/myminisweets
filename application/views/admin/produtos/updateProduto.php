@@ -39,7 +39,7 @@
     <br/>
     <br/>
     <?php echo form_error('img_url', '<div class="ui red label"><span>', '</span></div>'); ?>
-    <input type="submit" class="ui grey button" value="Finalizar Cadastro">
+    <input type="submit" class="ui grey button" value="Atualizar Cadastro">
   </form>
   <br/>
   <a href="<?php echo base_url('admin/Telas/cadastroProduto'); ?>"><button class="ui grey button">Voltar</button></a>

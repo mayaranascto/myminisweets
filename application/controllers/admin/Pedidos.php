@@ -13,6 +13,11 @@ class Pedidos extends CI_Controller {
 
     $data['produtos'] = $this->pedidos->getAllProducts()->result();
 
+    if($this->input->post()){
+      var_dump($this->input->post());
+      die();
+    }
+
     $this->load->view('templates/header');
     $this->load->view('templates/menuUpLeft');
     $this->load->view('admin/pedidos/criarPedido', $data);
