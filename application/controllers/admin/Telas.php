@@ -271,4 +271,8 @@ class Telas extends CI_Controller {
 
   }
 
+  public function addProduto(){
+    
+  }
+
 }

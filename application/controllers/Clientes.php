@@ -15,6 +15,7 @@ class Clientes extends CI_Controller {
 
 public function index(){
 
+  $this->load->view('templates/header');
   $this->load->view('clientes/cadastroCliente');
 }
 public function cadastroCliente(){
