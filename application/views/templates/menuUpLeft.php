@@ -38,7 +38,7 @@ Friends
         <i class="dropdown icon"></i>
         Pedidos
         <div class="menu">
-          <a class="item" href="<?php echo base_url('admin/Pedidos/criarPedido'); ?>">Criar Pedido</a>
+          <a class="item" href="<?php echo base_url('admin/Pedidos/criarPedidoA'); ?>">Criar Pedido</a>
           <a class="item" href="<?php echo base_url('admin/Pedidos/gerenciarPedidos'); ?>">Gerenciar Pedidos</a>
         </div>
       </div>

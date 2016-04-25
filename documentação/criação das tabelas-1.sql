@@ -1,8 +1,8 @@
-﻿CREATE TABLE pedidos_avulsos (
+CREATE TABLE pedidos_avulsos (
   id_pedidos_a SERIAL NOT NULL,
   nome_cliente VARCHAR NULL,
   endereco VARCHAR NULL,
-  telefone INTEGER NULL,
+  telefone INTEGER UNSIGNED NULL,
   email VARCHAR NULL,
   PRIMARY KEY(id_pedidos_a)
 );
@@ -28,6 +28,19 @@ CREATE TABLE Clientes (
   login VARCHAR() NULL,
   senha VARCHAR NULL,
   PRIMARY KEY(idClientes)
+);
+
+CREATE TABLE session (
+  idsession INT NOT NULL,
+  Clientes_idClientes SERIAL NOT NULL,
+  login VARCHAR NULL,
+  senha VARCHAR NULL,
+  chave VARCHAR NULL,
+  PRIMARY KEY(idsession),
+  FOREIGN KEY(Clientes_idClientes)
+    REFERENCES Clientes(idClientes)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
 );
 
 CREATE TABLE pedidos (
