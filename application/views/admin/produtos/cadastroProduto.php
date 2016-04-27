@@ -3,7 +3,7 @@
   <div class="ui divider"></div>
   <br/>
   <div class="ui grid">
-    <div class="four column centered row">
+    <div class="four column centered row" id="flash-messages">
       <?php
 
         if($this->session->flashdata('cadastroOk')){
@@ -68,19 +68,20 @@
   </form>
   <br/>
   <div class="ui grid">
-    <div class="four column centered row">
+    <div class="four column centered row" id="flash-messages">
       <?php
 
         if($this->session->flashdata('updateOk')){
           echo '<div class="ui green label"><span>'.$this->session->flashdata('updateOk').'</span></div>';
         }elseif($this->session->flashdata('updateFail')){
-          echo '<div class="ui green label"><span>'.$this->session->flashdata('updateFail').'</span></div>';
+          echo '<div class="ui red label"><span>'.$this->session->flashdata('updateFail').'</span></div>';
         }
         if($this->session->flashdata('deleteOk')){
           echo '<div class="ui green label"><span>'.$this->session->flashdata('deleteOk').'</span></div>';
         }elseif($this->session->flashdata('deleteFail')){
-          echo '<div class="ui green label"><span>'.$this->session->flashdata('deleteFail').'</span></div>';
+          echo '<div class="ui red label"><span>'.$this->session->flashdata('deleteFail').'</span></div>';
         }
 
       ?>
     </div>
+  </div>

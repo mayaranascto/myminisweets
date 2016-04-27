@@ -34,14 +34,27 @@
         </div>
       </div>
       <br/>
-      <div class="ui action input">
-        <button class="ui button">
-          <i class="minus icon"></i>
-        </button>
-        <input type="text" value="">
-        <button class="ui button">
-          <i class="plus icon"></i>
-        </button>
+      <div class="ui animated fade button show" tabindex="0">
+        <div class="visible content">Pesquisar Produto</i></div>
+        <div class="hidden content"><i class="search icon"></i></div>
+      </div>
+      <div class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+          Escreva o nome do produto desejado
+        </div>
+        <div class="content">
+          <div class="ui fluid icon input">
+            <input type="text" placeholder="Pesquisa em um campo amplo">
+            <i class="search icon"></i>
+          </div>
+          <br/>
+
+        </div>
+        <div class="actions">
+          <div class="ui button">Cancel</div>
+          <div class="ui button">OK</div>
+        </div>
       </div>
       <?php
 
