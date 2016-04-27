@@ -2,13 +2,13 @@
   id_pedidos_a SERIAL NOT NULL,
   nome_cliente VARCHAR NULL,
   endereco VARCHAR NULL,
-  telefone INTEGER NULL,
+  telefone VARCHAR NULL,
   email VARCHAR NULL,
   PRIMARY KEY(id_pedidos_a)
 );
 
 CREATE TABLE Produtos (
-  idProdutos SERIAL NOT NULL,
+  idProdutos INT NOT NULL,
   nome_produto VARCHAR NULL,
   descricao VARCHAR NULL,
   preco DOUBLE NULL,
@@ -17,7 +17,7 @@ CREATE TABLE Produtos (
 );
 
 CREATE TABLE Clientes (
-  idClientes SERIAL NOT NULL,
+  idClientes INT NOT NULL,
   nome_cliente VARCHAR NULL,
   cpf INT NULL,
   endereco VARCHAR NULL,
@@ -30,9 +30,22 @@ CREATE TABLE Clientes (
   PRIMARY KEY(idClientes)
 );
 
+CREATE TABLE session (
+  idsession INT NOT NULL,
+  Clientes_idClientes INT NOT NULL,
+  login VARCHAR NULL,
+  senha VARCHAR NULL,
+  chave VARCHAR NULL,
+  PRIMARY KEY(idsession),
+  FOREIGN KEY(Clientes_idClientes)
+    REFERENCES Clientes(idClientes)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+);
+
 CREATE TABLE pedidos (
-  idpedidos SERIAL NOT NULL,
-  Clientes_idClientes SERIAL NOT NULL,
+  idpedidos INT NOT NULL,
+  Clientes_idClientes INT NOT NULL,
   num_pedido INT NULL,
   PRIMARY KEY(idpedidos),
   FOREIGN KEY(Clientes_idClientes)
@@ -42,22 +55,22 @@ CREATE TABLE pedidos (
 );
 
 CREATE TABLE itens (
+  Produtos_idProdutos INT NOT NULL,
   pedidos_avulsos_id_pedidos_a SERIAL NOT NULL,
-  Produtos_idProdutos SERIAL NOT NULL,
-  PRIMARY KEY(pedidos_avulsos_id_pedidos_a, Produtos_idProdutos),
-  FOREIGN KEY(pedidos_avulsos_id_pedidos_a)
-    REFERENCES pedidos_avulsos(id_pedidos_a)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
+  PRIMARY KEY(Produtos_idProdutos, pedidos_avulsos_id_pedidos_a),
   FOREIGN KEY(Produtos_idProdutos)
     REFERENCES Produtos(idProdutos)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+  FOREIGN KEY(pedidos_avulsos_id_pedidos_a)
+    REFERENCES pedidos_avulsos(id_pedidos_a)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 );
 
 CREATE TABLE pedidos_has_Produtos (
-  pedidos_idpedidos SERIAL NOT NULL,
-  Produtos_idProdutos SERIAL NOT NULL,
+  pedidos_idpedidos INT NOT NULL,
+  Produtos_idProdutos INT NOT NULL,
   PRIMARY KEY(pedidos_idpedidos, Produtos_idProdutos),
   FOREIGN KEY(pedidos_idpedidos)
     REFERENCES pedidos(idpedidos)

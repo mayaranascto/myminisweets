@@ -18,12 +18,21 @@
   <br/>
 
   <form class="ui form" action="<?php echo base_url('admin/Telas/cadastroProduto') ?>" method="post" enctype="multipart/form-data">
-    <div class="field">
-      <label>Nome do Produto</label>
-      <input type="text" name="nome_produto" placeholder="Nome">
-      <br/>
-      <br/>
-      <?php echo form_error('nome_produto', '<div class="ui red label"><span>', '</span></div>'); ?>
+    <div class="two fields">
+      <div class="field">
+        <label>Nome do Produto</label>
+        <input type="text" name="nome_produto" placeholder="Nome">
+        <br/>
+        <br/>
+        <?php echo form_error('nome_produto', '<div class="ui red label"><span>', '</span></div>'); ?>
+      </div>
+      <div class="field">
+        <label>Categoria</label>
+        <input type="text" name="categoria" placeholder="Categoria">
+        <br/>
+        <br/>
+        <?php echo form_error('categoria', '<div class="ui red label"><span>', '</span></div>'); ?>
+      </div>
     </div>
     <div class="field">
       <label>Descrição do Produto</label>

@@ -150,15 +150,16 @@ class Telas extends CI_Controller {
 
       $this->form_validation->set_message('required', 'O campo %s é obrigatório');
 
-      $this->form_validation->set_rules('nome_produto', 'Nome', 'required|trim');
-      $this->form_validation->set_rules('descricao', 'Descrição', 'required|trim');
-      $this->form_validation->set_rules('preco', 'Preço', 'required|trim');
+      $this->form_validation->set_rules('nome_produto', 'Nome', 'trim|required');
+      $this->form_validation->set_rules('descricao', 'Descrição', 'trim|required');
+      $this->form_validation->set_rules('preco', 'Preço', 'trim|required');
+      $this->form_validation->set_rules('categoria', 'categoria', 'trim|required');
       if($_FILES['img_url']['size']==0){
         $this->form_validation->set_rules('img_url', 'Imagem do Produto', 'required');
       }
 
       if($this->form_validation->run()==TRUE){
-        $data = elements(array('nome_produto', 'descricao', 'preco'), $this->input->post());
+        $data = elements(array('nome_produto', 'categoria', 'descricao', 'preco'), $this->input->post());
 
         $config['upload_path']          = PATHDEFAULT.'assets'.DS.'img'.DS.'produtos';
         $config['allowed_types']        = 'gif|jpg|png';
@@ -209,12 +210,13 @@ class Telas extends CI_Controller {
 
       $this->form_validation->set_message('required', 'O campo %s é obrigatório');
 
-      $this->form_validation->set_rules('nome_produto', 'Nome', 'required|trim');
-      $this->form_validation->set_rules('descricao', 'Descrição', 'required|trim');
-      $this->form_validation->set_rules('preco', 'Preço', 'required|trim');
+      $this->form_validation->set_rules('nome_produto', 'Nome', 'trim|required');
+      $this->form_validation->set_rules('descricao', 'Descrição', 'trim|required');
+      $this->form_validation->set_rules('preco', 'Preço', 'trim|required');
+      $this->form_validation->set_rules('categoria', 'Categoria', 'trim|required');
 
       if($this->form_validation->run()==TRUE){
-        $data = elements(array('nome_produto', 'descricao', 'preco'), $this->input->post());
+        $data = elements(array('nome_produto', 'categoria', 'descricao', 'preco'), $this->input->post());
 
         $config['upload_path']          = PATHDEFAULT.'assets'.DS.'img'.DS.'produtos';
         $config['allowed_types']        = 'gif|jpg|png';
@@ -272,7 +274,7 @@ class Telas extends CI_Controller {
   }
 
   public function addProduto(){
-    
+
   }
 
 }

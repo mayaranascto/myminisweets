@@ -30,6 +30,19 @@ CREATE TABLE Clientes (
   PRIMARY KEY(idClientes)
 );
 
+CREATE TABLE session (
+  idsession INT NOT NULL,
+  Clientes_idClientes SERIAL NOT NULL,
+  login VARCHAR NULL,
+  senha VARCHAR NULL,
+  chave VARCHAR NULL,
+  PRIMARY KEY(idsession),
+  FOREIGN KEY(Clientes_idClientes)
+    REFERENCES Clientes(idClientes)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+);
+
 CREATE TABLE pedidos (
   idpedidos SERIAL NOT NULL,
   Clientes_idClientes SERIAL NOT NULL,
