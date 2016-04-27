@@ -121,7 +121,7 @@
   </form>
   <br>
   <div class="ui grid">
-  <div class="four column centered row">
+  <div class="four column centered row" id="flash-messages">
     <?php
 
       if($this->session->flashdata('cadastroOk')){

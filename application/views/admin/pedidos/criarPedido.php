@@ -1,27 +1,48 @@
 <div class="twelve wide column">
   <h1>Criar Pedido</h1>
   <div class="ui divider"></div>
-  <form class="ui form" action="<?php echo base_url('admin/Pedidos/criarPedido'); ?>" method="post">
+  <form class="ui form" action="<?php echo base_url('admin/Pedidos/criarPedidoA'); ?>" method="post">
 
       <div class="field">
         <label for="nome">Nome do Cliente</label>
-        <input type="text" name="nome" value="">
+        <input type="text" name="nome" value="<?php echo set_value('nome'); ?>">
+        <br/>
+        <br/>
+        <?php echo form_error('nome', '<div class="ui red label"><span>', '</span></div>'); ?>
       </div>
       <div class="field">
-        <label for="nome">Endereço</label>
-        <input type="text" name="endereco" value="">
+        <label for="endereco">Endereço</label>
+        <input type="text" name="endereco" value="<?php echo set_value('endereco'); ?>">
+        <br/>
+        <br/>
+        <?php echo form_error('endereco', '<div class="ui red label"><span>', '</span></div>'); ?>
       </div>
       <div class="two fields">
         <div class="field">
-          <label for="nome">Telefone</label>
-          <input type="text" name="telefone" value="">
+          <label for="telefone">Telefone</label>
+          <input type="text" name="telefone" value="<?php echo set_value('telefone'); ?>">
+          <br/>
+          <br/>
+          <?php echo form_error('telefone', '<div class="ui red label"><span>', '</span></div>'); ?>
         </div>
         <div class="field">
-          <label for="nome">E-mail</label>
-          <input type="text" name="email" value="">
+          <label for="email">E-mail</label>
+          <input type="text" name="email" value="<?php echo set_value('email'); ?>">
+          <br/>
+          <br/>
+          <?php echo form_error('email', '<div class="ui red label"><span>', '</span></div>'); ?>
         </div>
       </div>
       <br/>
+      <div class="ui action input">
+        <button class="ui button">
+          <i class="minus icon"></i>
+        </button>
+        <input type="text" value="">
+        <button class="ui button">
+          <i class="plus icon"></i>
+        </button>
+      </div>
       <?php
 
         $tamplate = array(

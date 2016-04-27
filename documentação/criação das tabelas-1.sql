@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 ﻿CREATE TABLE pedidos_avulsos (
   id_pedidos_a SERIAL NOT NULL,
   nome_cliente VARCHAR NULL,
   endereco VARCHAR NULL,
   telefone INTEGER NULL,
+=======
+CREATE TABLE pedidos_avulsos (
+  id_pedidos_a SERIAL NOT NULL,
+  nome_cliente VARCHAR NULL,
+  endereco VARCHAR NULL,
+  telefone INTEGER UNSIGNED NULL,
+>>>>>>> f8782cbe30ee0dd4d4634102682ae25bda838f1a
   email VARCHAR NULL,
   PRIMARY KEY(id_pedidos_a)
 );
