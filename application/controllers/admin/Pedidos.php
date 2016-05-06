@@ -5,6 +5,7 @@ class Pedidos extends CI_Controller {
   public function __construct(){
     parent::__construct();
     $this->load->model('Pedidos_model', 'pedidos');
+    $this->load->model('Telas_model', 'telas');
     $this->load->library('table');
     $this->load->helper('array');
     $this->load->library('form_validation');
@@ -13,8 +14,12 @@ class Pedidos extends CI_Controller {
   public function criarPedidoA(){
 
     $data['produtos'] = $this->pedidos->getAllProducts()->result();
+    //var_dump($this->pedidos->getProductLike('Batata Frita')->result());
 
     if($this->input->post()){
+
+      var_dump($this->input->post());
+      die();
 
       $this->form_validation->set_message('required', 'O campo %s é obrigatório');
 
@@ -33,6 +38,20 @@ class Pedidos extends CI_Controller {
     $this->load->view('templates/menuUpLeft');
     $this->load->view('admin/pedidos/criarPedido', $data);
     $this->load->view('templates/footer');
+
+  }
+
+  public function pesquisarProdutoJson(){
+      $nomeProduto = $this->input->post('busca');
+      echo json_encode($this->pedidos->getProductLike($nomeProduto)->result());
+
+  }
+
+  public function addProduto($produto){
+
+    var_dump($this->telas->getProductById($produto)->row());
+    die();
+    
 
   }
 

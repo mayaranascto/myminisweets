@@ -1,7 +1,7 @@
 <div class="twelve wide column">
   <h1>Criar Pedido</h1>
   <div class="ui divider"></div>
-  <form class="ui form" action="<?php echo base_url('admin/Pedidos/criarPedidoA'); ?>" method="post">
+  <form class="ui form" action="<?php echo base_url('admin/Pedidos/pesquisarProduto'); ?>" method="post">
 
       <div class="field">
         <label for="nome">Nome do Cliente</label>
@@ -38,24 +38,6 @@
         <div class="visible content">Pesquisar Produto</i></div>
         <div class="hidden content"><i class="search icon"></i></div>
       </div>
-      <div class="ui modal">
-        <i class="close icon"></i>
-        <div class="header">
-          Escreva o nome do produto desejado
-        </div>
-        <div class="content">
-          <div class="ui fluid icon input">
-            <input type="text" placeholder="Pesquisa em um campo amplo">
-            <i class="search icon"></i>
-          </div>
-          <br/>
-
-        </div>
-        <div class="actions">
-          <div class="ui button">Cancel</div>
-          <div class="ui button">OK</div>
-        </div>
-      </div>
       <?php
 
         $tamplate = array(
@@ -72,7 +54,44 @@
         echo $this->table->generate();
       ?>
 
-      <button type="input" class="ui grey button" value="Finalizar Pedido">Finalizar Pedido</button>
+      <!-- <button type="input" class="ui grey button" value="Finalizar Pedido">Finalizar Pedido</button> -->
 
+  </form>
+  <form class="ui form" action="<?php echo base_url('admin/Pedidos/pesquisarProduto'); ?>" method="post">
+    <div class="ui modal">
+      <i class="close icon"></i>
+      <div class="header">
+        Escreva o nome do produto desejado
+      </div>
+      <div class="content">
+        <div class="ui fluid icon input">
+          <input type="text" name="search" id="search" placeholder="" value="<?php echo set_value('nome'); ?>">
+          <button onclick="buscaProduto()"><i class="search icon"></i></button>
+        </div>
+        <div>
+          <table class="ui celled padded table" id="table_busca_produto">
+            <tr>
+              <th>
+                ID
+              </th>
+              <th>
+                Nome do produto
+              </th>
+              <th>
+                Preço
+              </th>
+              <th>
+                Adicionar
+              </th>
+            </tr>
+          </table>
+        </div>
+        <br/>
+      </div>
+      <div class="actions">
+        <button class="ui button">Cancel</button>
+        <input type="button" class="ui button" value="OK">
+      </div>
+    </div>
   </form>
 </div>
