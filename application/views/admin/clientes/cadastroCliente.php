@@ -2,7 +2,7 @@
   <h2>Cadastro de Clientes</h2>
   <div class="ui divider"></div>
   <br/>
-  <form class="ui form" action="<?php echo base_url('admin/Telas/cadastroCliente') ?>" method="post">
+  <form class="ui form" action="<?php echo base_url('admin/Telas/cadastroCliente') ?>" method="post" enctype="multipart/form-data">
     <div class="field">
       <label>Nome</label>
       <div class="two fields">

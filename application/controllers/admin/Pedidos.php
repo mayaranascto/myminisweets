@@ -12,7 +12,6 @@ class Pedidos extends CI_Controller {
   }
 
   public function criarPedidoA(){
-
     $data['produtos'] = $this->pedidos->getAllProducts()->result();
     //var_dump($this->pedidos->getProductLike('Batata Frita')->result());
 
@@ -49,9 +48,8 @@ class Pedidos extends CI_Controller {
 
   public function addProduto($produto){
 
-    var_dump($this->telas->getProductById($produto)->row());
-    die();
     
+
 
   }
 
