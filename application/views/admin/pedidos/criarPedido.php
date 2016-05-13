@@ -47,11 +47,21 @@
         $this->table->set_template($tamplate);
 
         $this->table->set_heading('Nome do Produto', 'Descrição', 'Preço', 'Quantidade', 'Comprar');
-        foreach ($produtos as $linha) {
-          $this->table->add_row(anchor('admin/Telas/verProduto/'.$linha->idprodutos, $linha->nome_produto), $linha->descricao, 'R$ '.$linha->preco, '<input type="text" name="quant_'.$linha->nome_produto.'">', '<div class="ui left floated compact segment"><div class="ui fitted toggle checkbox"><input type="checkbox" name="'.$linha->nome_produto.'"><label></label></div></div>');
+        if($pedido != NULL){
+          foreach ($pedido as $linha) {
+            var_dump($linha);
+            die();
+            $this->table->add_row(anchor('admin/Telas/verProduto/'.$linha->idprodutos, $linha->nome_produto), $linha->descricao, 'R$ '.$linha->preco, '<input type="text" name="quant_'.$linha->nome_produto.'">', '<div class="ui left floated compact segment"><div class="ui fitted toggle checkbox"><input type="checkbox" name="'.$linha->nome_produto.'"><label></label></div></div>');
+          }
+
+          echo $this->table->generate();
         }
 
-        echo $this->table->generate();
+
+        // foreach ($pedido as $linha) {
+        //   var_dump($linha);
+        //
+        // }
       ?>
 
       <!-- <button type="input" class="ui grey button" value="Finalizar Pedido">Finalizar Pedido</button> -->

@@ -33,6 +33,8 @@ class Pedidos extends CI_Controller {
       }
     }
 
+    $data['pedido']=NULL;
+
     $this->load->view('templates/header');
     $this->load->view('templates/menuUpLeft');
     $this->load->view('admin/pedidos/criarPedido', $data);
@@ -48,8 +50,14 @@ class Pedidos extends CI_Controller {
 
   public function addProduto($produto){
 
-    
+    $data['pedido'] = $this->telas->getProductById($produto)->row();
+    // var_dump($data['pedido']);
+    // die();
 
+    $this->load->view('templates/header');
+    $this->load->view('templates/menuUpLeft');
+    $this->load->view('admin/pedidos/criarPedido', $data);
+    $this->load->view('templates/footer');
 
   }
 
