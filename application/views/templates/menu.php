@@ -9,6 +9,7 @@
                 <li><a href="<?php echo base_url('Geral/produtos'); ?>">Produtos</a></li>
                 <li><a href="<?php echo base_url('Geral/encomendas'); ?>">Encomendas</a></li>
                 <li><a href="<?php echo base_url('Geral/contato'); ?>">Contato</a></li>
+                <li><a href="<?php echo base_url('Geral/login'); ?>" >Acesso</a></li>
             </ul>
         </div>
     </div>
