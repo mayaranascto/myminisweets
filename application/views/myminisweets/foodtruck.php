@@ -24,6 +24,7 @@
                         <li><a href="<?php echo base_url('Geral/produtos'); ?>">Produtos</a></li>
                         <li><a href="<?php echo base_url('Geral/encomendas'); ?>">Encomendas</a></li>
                         <li><a href="<?php echo base_url('Geral/contato'); ?>">Contato</a></li>
+                        <li><a href="<?php echo base_url('Geral/login'); ?>" >Acesso</a></li>
                     </ul>
                 </div>
             </div>
@@ -36,7 +37,7 @@
     <div class="infobox">
         <div class="container info">
             <header>
-                <h1>My Mini Sweets Foodtruck</h1>
+                <h1>My Mini Sweets - Foodtruck</h1>
                 <p>Venha conhecer de perto todas as delícias que a gente preparou especialmente pra você!</p>
             </header>
             <hr class="separator">

@@ -24,6 +24,7 @@
                         <li><a href="<?php echo base_url('Geral/produtos'); ?>">Produtos</a></li>
                         <li><a href="<?php echo base_url('Geral/encomendas'); ?>" id="visited">Encomendas</a></li>
                         <li><a href="<?php echo base_url('Geral/contato'); ?>">Contato</a></li>
+                        <li><a href="<?php echo base_url('Geral/login'); ?>" >Acesso</a></li>
                     </ul>
                 </div>
             </div>
@@ -36,7 +37,7 @@
     <div class="infobox">
         <div class="container info">
             <header>
-                <h1>My Mini Sweets Encomendas</h1>
+                <h1>My Mini Sweets - Encomendas</h1>
                 <p>Vem fazer a festa com a gente!</p>
             </header>
             <hr class="separator">
