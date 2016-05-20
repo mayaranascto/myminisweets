@@ -20,6 +20,6 @@ class Login extends CI_Controller {
      */
     public function index()
     {
-        $this->load->view('myminisweets/login');
+        $this->load->view('myminisweets/admin/login');
     }
 }
