@@ -22,18 +22,13 @@ class Pedidos extends CI_Controller {
         array_push($this->data['pedido'] , $this->dash->getProductById($produto)->row());
         $this->session->set_userdata('teste', $this->data['pedido']);
       }else{
-        $this->data['pedido'] = $this->session->userdata('teste');
-        array_push($this->data['pedido'] , $this->dash->getProductById($produto)->row());
-        $this->session->set_userdata('teste', $this->data['pedido']);
-        //$i = 0;
         foreach($this->session->userdata('teste') as $id){
-         echo $id->idprodutos;
-
-         //o restante do seu código aqui
-         //$i++;
-
+          if($id->idprodutos!=$produto){
+            $this->data['pedido'] = $this->session->userdata('teste');
+            array_push($this->data['pedido'] , $this->dash->getProductById($produto)->row());
+            $this->session->set_userdata('teste', $this->data['pedido']);
+          }
         }
-
       }
 
       var_dump($this->session->userdata('teste'));

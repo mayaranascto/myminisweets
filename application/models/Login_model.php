@@ -16,4 +16,19 @@ class Login_model extends CI_Model {
       }
 
     }
-  }
+
+    public function verificaPermissao($login=NULL){
+
+      if($login==NULL){
+        return false;
+      }else{
+        $data = $this->db->get_where('clientes', array('login' => $login))->row('permissao');
+        if($data == 2){
+          return true;
+        }else{
+          return false;
+        }
+      }
+
+    }
+}

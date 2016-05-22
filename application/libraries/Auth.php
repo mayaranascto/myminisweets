@@ -32,9 +32,7 @@ class Auth {
 	}
 
 	public function eliminarAuth() {
-		$this->CI->session->unset_userdata('logged_in');
-		$this->CI->session->unset_userdata('login');
-		$this->CI->session->unset_userdata('permissao');
+		$this->CI->session->sess_destroy();
 	}
 
 }

@@ -26,8 +26,14 @@ class Login extends CI_Controller {
       }
 
       if($this->login->verificaDados($login, $senha)){
-          $this->auth->criarAuth($login);
-          redirect('admin/Dashboard');
+          if($this->login->verificaPermissao($login)){
+            $this->auth->criarAuth($login);
+            redirect('admin/Dashboard');
+          }else{
+            $this->auth->criarAuth($login);
+            redirect('Geral/Produtos');
+          }
+
       }else{
           $this->session->set_flashdata('loginFail', 'Login ou Senha incorretos');
           redirect('admin/Login');
