@@ -13,4 +13,8 @@ class Pedidos_model extends CI_Model {
       $sql = "SELECT * FROM produtos WHERE nome_produto ILIKE '%" .$this->db->escape_like_str($search)."%' ESCAPE '!' ORDER BY nome_produto ASC";
       return $this->db->query($sql);
   }
+
+  public function pedidoFinalizado(){
+    return TRUE;
+  }
 }

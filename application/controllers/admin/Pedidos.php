@@ -23,31 +23,46 @@ class Pedidos extends CI_Controller {
         $this->session->set_userdata('teste', $this->data['pedido']);
       }else{
         foreach($this->session->userdata('teste') as $id){
-          if($id->idprodutos!=$produto){
-            $this->data['pedido'] = $this->session->userdata('teste');
-            array_push($this->data['pedido'] , $this->dash->getProductById($produto)->row());
-            $this->session->set_userdata('teste', $this->data['pedido']);
+          if($id->idprodutos != $produto){
+            $existe = FALSE;
+            var_dump($existe);
+            echo '<br/>';
+          }else{
+            $existe = TRUE;
+            var_dump($existe);
+            echo '<br/>';
+            break;
           }
+        }
+        if($existe == FALSE){
+          $this->data['pedido'] = $this->session->userdata('teste');
+          array_push($this->data['pedido'] , $this->dash->getProductById($produto)->row());
+          $this->session->set_userdata('teste', $this->data['pedido']);
         }
       }
 
       var_dump($this->session->userdata('teste'));
     }
 
-    // if($this->input->post()){
-    //
-    //   $this->form_validation->set_message('required', 'O campo %s é obrigatório');
-    //
-    //   $this->form_validation->set_rules('nome', 'Nome do Cliente', 'trim|required');
-    //   $this->form_validation->set_rules('endereco', 'Endereço', 'trim|required');
-    //   $this->form_validation->set_rules('telefone', 'Telefone', 'trim|required');
-    //   $this->form_validation->set_rules('email', 'E-mail', 'trim|required');
-    //
-    //   if($this->form_validation->run()==TRUE){
-    //     var_dump($this->input->post());
-    //     die();
-    //   }
-    // }
+    if($this->input->post()){
+
+      $this->form_validation->set_message('required', 'O campo %s é obrigatório');
+
+      $this->form_validation->set_rules('nome', 'Nome do Cliente', 'trim|required');
+      $this->form_validation->set_rules('endereco', 'Endereço', 'trim|required');
+      $this->form_validation->set_rules('telefone', 'Telefone', 'trim|required');
+      $this->form_validation->set_rules('email', 'E-mail', 'trim|required');
+
+      // if($this->form_validation->run()==TRUE){
+      //   if($this->pedidos->pedidoFinalizado()){
+      //     $this->session->set_flashdata('pedidoOk', 'Pedido Finalizado com Sucesso');
+      //     redirect('admin/Pedidos/criarPedidoA');
+      //   }else{
+      //     $this->session->set_flashdata('pedidoFail', 'Ocorreu um erro ao finalizar o pedido');
+      //     redirect('admin/Pedidos/criarPedidoA');
+      //   }
+      // }
+    }
 
       // foreach ($this->data['pedido'] as $linha) {
       //   array_push($produtos['carrinho'], $this->dash->getProductById($linha)->row());

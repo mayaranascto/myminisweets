@@ -2,7 +2,20 @@
   <h1>Criar Pedido</h1>
   <div class="ui divider"></div>
   <form class="ui form" action="<?php echo base_url('admin/Pedidos/criarPedidoA'); ?>" method="post">
+  <div class="ui grid">
+    <div class="four column centered row" id="flash-messages">
+      <?php
 
+        if($this->session->flashdata('pedidoOk')){
+          echo '<div class="ui green label"><span>'.$this->session->flashdata('pedidoOk').'</span></div>';
+        }elseif($this->session->flashdata('pedidoFail')){
+          echo '<div class="ui green label"><span>'.$this->session->flashdata('pedidoFail').'</span></div>';
+        }
+
+      ?>
+    </div>
+  </div>
+    <br/>
       <div class="field">
         <label for="nome">Nome do Cliente</label>
         <input type="text" name="nome" value="<?php echo set_value('nome'); ?>">
@@ -46,10 +59,10 @@
 
         $this->table->set_template($tamplate);
 
-        $this->table->set_heading('Nome do Produto', 'Descrição', 'Preço', 'Quantidade', 'Comprar');
+        $this->table->set_heading('Nome do Produto', 'Descrição', 'Preço', 'Quantidade');
 
         foreach ($pedido as $linha) {
-          $this->table->add_row(anchor('admin/Telas/verProduto/'.$linha->idprodutos, $linha->nome_produto), $linha->descricao, 'R$ '.$linha->preco, '<input type="text" name="quant_'.$linha->nome_produto.'">', '<div class="ui left floated compact segment"><div class="ui fitted toggle checkbox"><input type="checkbox" name="'.$linha->nome_produto.'"><label></label></div></div>');
+          $this->table->add_row(anchor('admin/Telas/verProduto/'.$linha->idprodutos, $linha->nome_produto), $linha->descricao, 'R$ '.$linha->preco, '<input type="text" name="quant_'.$linha->nome_produto.'">');
         }
 
         echo $this->table->generate();
