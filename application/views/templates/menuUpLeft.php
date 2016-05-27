@@ -39,7 +39,7 @@ Friends
         Pedidos
         <div class="menu">
           <a class="item" href="<?php echo base_url('admin/Pedidos/criarPedidoA'); ?>">Criar Pedido</a>
-          <a class="item" href="<?php echo base_url('admin/Pedidos/gerenciarPedidos'); ?>">Gerenciar Pedidos</a>
+          <a class="item" href="<?php echo base_url('admin/Pedidos/verPedidos'); ?>">Gerenciar Pedidos</a>
         </div>
       </div>
     </div>

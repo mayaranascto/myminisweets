@@ -18,7 +18,7 @@
     <br/>
       <div class="field">
         <label for="nome">Nome do Cliente</label>
-        <input type="text" name="nome" value="<?php echo set_value('nome'); ?>">
+        <input type="text" name="nome_cliente" value="<?php echo set_value('nome_cliente'); ?>">
         <br/>
         <br/>
         <?php echo form_error('nome', '<div class="ui red label"><span>', '</span></div>'); ?>
@@ -60,9 +60,10 @@
         $this->table->set_template($tamplate);
 
         $this->table->set_heading('Nome do Produto', 'Descrição', 'Preço', 'Quantidade');
-
-        foreach ($pedido as $linha) {
-          $this->table->add_row(anchor('admin/Telas/verProduto/'.$linha->idprodutos, $linha->nome_produto), $linha->descricao, 'R$ '.$linha->preco, '<input type="text" name="quant_'.$linha->nome_produto.'">');
+        if($pedido != NULL){
+          foreach ($pedido as $linha) {
+            $this->table->add_row($linha->nome_produto, $linha->descricao, 'R$ '.$linha->preco, '<input size="5" type="text" name="quantidade[]"><input type="text" name="Produtos_idProdutos[]" value="'.$linha->idprodutos.'" hidden>');
+          }
         }
 
         echo $this->table->generate();
@@ -80,7 +81,7 @@
       <div class="content">
         <div class="ui fluid icon input">
           <input type="text" name="search" id="search" placeholder="" value="<?php echo set_value('nome'); ?>">
-          <button onclick="buscaProduto()"><i class="search icon"></i></button>
+          <button class="purple ui button" onclick="buscaProduto()"><i class="white search icon"></i></button>
         </div>
         <div>
           <table class="ui celled padded table" id="table_busca_produto">
@@ -104,7 +105,6 @@
       </div>
       <div class="actions">
         <button class="ui button">Cancel</button>
-        <input type="button" class="ui button" value="OK">
       </div>
     </div>
   </form>

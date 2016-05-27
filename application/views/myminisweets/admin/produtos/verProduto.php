@@ -15,7 +15,6 @@
         echo '<p>'.$produto->preco.'</p>';
       ?>
       <br/>
-      <button class="ui red button">Comprar</button>
     </div>
 
 

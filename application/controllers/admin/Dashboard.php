@@ -13,6 +13,7 @@ class Dashboard extends CI_Controller {
     $this->load->library('table');
     $this->load->helper('url');
     $this->load->helper('html');
+    $this->load->library('cpf');
 
 }
 
@@ -26,62 +27,70 @@ class Dashboard extends CI_Controller {
 
     if($this->input->post()){
 
-      $this->form_validation->set_message('required', 'O campo %s é obrigatório');
-      $this->form_validation->set_message('is_unique', 'Esse %s já se encontra cadastrado no nosso sistema');
+      if(!$this->cpf->validar($this->input->post('cpf'))){
+        $this->session->set_flashdata('cpfFail', 'CPF é Inválido');
+      }else{
+        $this->form_validation->set_message('required', 'O campo %s é obrigatório');
+        $this->form_validation->set_message('is_unique', 'Esse %s já se encontra cadastrado no nosso sistema');
 
-      $this->form_validation->set_rules('primeiro_nome', 'Primeiro Nome', 'required|trim');
-      $this->form_validation->set_rules('ultimo_nome', 'Último Nome', 'required|trim');
-      $this->form_validation->set_rules('cpf', 'CPF', 'required|trim|is_unique[clientes.cpf]');
-      $this->form_validation->set_rules('fixo', 'Telefone Fixo', 'trim');
-      $this->form_validation->set_rules('celular', 'Celular', 'required|trim');
-      $this->form_validation->set_rules('rua', 'Rua', 'required|trim');
-      $this->form_validation->set_rules('num_casa', 'Número', 'required|trim');
-      $this->form_validation->set_rules('bairro', 'Bairro', 'required|trim');
-      $this->form_validation->set_rules('complemento', 'complemento', 'trim');
-      $this->form_validation->set_rules('cidade', 'Cidade', 'required|trim');
-      $this->form_validation->set_rules('cep', 'CEP', 'required|trim');
-      $this->form_validation->set_rules('login', 'Login', 'required|trim|is_unique[clientes.login]');
-      $this->form_validation->set_rules('senha', 'Senha', 'required|trim');
-      $this->form_validation->set_rules('repita_senha', 'Repita Senha', 'required|trim');
+        $this->form_validation->set_rules('primeiro_nome', 'Primeiro Nome', 'required|trim');
+        $this->form_validation->set_rules('ultimo_nome', 'Último Nome', 'required|trim');
+        $this->form_validation->set_rules('cpf', 'CPF', 'required|trim|is_unique[clientes.cpf]');
 
-      if($this->form_validation->run()==TRUE){
-        // var_dump($this->input->post());
-        // die();
-        $data = elements(array('primeiro_nome', 'ultimo_nome', 'cpf', 'fixo', 'celular', 'rua', 'num_casa', 'bairro', 'complemento', 'cidade', 'cep', 'login', 'senha'), $this->input->post());
-        $data['senha'] = md5($data['senha']);
-        if($this->dash->inserirCliente($data)){
-          //$this->session->set_flashdata('cadastroOk', 'O Cliente foi cadastrado com sucesso');
-          $config = Array(
-             'protocol' => 'smtp',
-             'smtp_host' => 'ssl://smtp.gmail.com',
-             'smtp_port' => 465,
-             'smtp_user' => 'mayaranasctolima@gmail.com', // change it to yours
-             'smtp_pass' => 'maya33ibiza', // change it to yours
-             'mailtype' => "html",
-             'newline' => "\r\n",
-             'charset' => 'utf-8',
-             'wordwrap' => TRUE,
-          );
-          $this->load->library('email', $config);
+        $this->form_validation->set_rules('fixo', 'Telefone Fixo', 'trim');
+        $this->form_validation->set_rules('celular', 'Celular', 'required|trim');
+        $this->form_validation->set_rules('rua', 'Rua', 'required|trim');
+        $this->form_validation->set_rules('num_casa', 'Número', 'required|trim');
+        $this->form_validation->set_rules('bairro', 'Bairro', 'required|trim');
+        $this->form_validation->set_rules('complemento', 'complemento', 'trim');
+        $this->form_validation->set_rules('cidade', 'Cidade', 'required|trim');
+        $this->form_validation->set_rules('cep', 'CEP', 'required|trim');
+        $this->form_validation->set_rules('login', 'Login', 'required|trim|is_unique[clientes.login]');
+        $this->form_validation->set_rules('senha', 'Senha', 'required|trim');
+        $this->form_validation->set_rules('repita_senha', 'Repita Senha', 'required|trim');
 
-          $this->email->from('lucasdocetec@gmail.com', 'Lucas');
-          $this->email->to($data['login']);
-          $this->email->subject('Email Test');
-          $this->email->message('<html><body>Testing the email class.</body></html>');
-          if($this->email->send()){
-            $this->session->set_flashdata('cadastroOk', 'O Cliente foi cadastrado com sucesso');
+        if($this->form_validation->run()==TRUE){
+          // var_dump($this->input->post());
+          // die();
+          $data = elements(array('primeiro_nome', 'ultimo_nome', 'cpf', 'fixo', 'celular', 'rua', 'num_casa', 'bairro', 'complemento', 'cidade', 'cep', 'login', 'senha'), $this->input->post());
+          $data['senha'] = md5($data['senha']);
+          if($this->dash->inserirCliente($data)){
+            //$this->session->set_flashdata('cadastroOk', 'O Cliente foi cadastrado com sucesso');
+            $config = Array(
+               'protocol' => 'smtp',
+               'smtp_host' => 'ssl://smtp.gmail.com',
+               'smtp_port' => 465,
+               'smtp_user' => 'mayaranasctolima@gmail.com', // change it to yours
+               'smtp_pass' => 'maya33ibiza', // change it to yours
+               'mailtype' => "html",
+               'newline' => "\r\n",
+               'charset' => 'utf-8',
+               'wordwrap' => TRUE,
+            );
+            $this->load->library('email', $config);
+
+            $this->email->from('lucasdocetec@gmail.com', 'Lucas');
+            $this->email->to($data['login']);
+            $this->email->subject('Email Test');
+            $this->email->message('<html><body>Testing the email class.</body></html>');
+            if($this->email->send()){
+              $this->session->set_flashdata('cadastroOk', 'O Cliente foi cadastrado com sucesso');
+            }else{
+              var_dump($this->email->print_debugger());
+              die();
+            }
           }else{
-            var_dump($this->email->print_debugger());
-            die();
+            $this->session->set_flashdata('cadastroFail', 'Ocorreu um erro com o cadastro');
           }
-        }else{
-          $this->session->set_flashdata('cadastroFail', 'Ocorreu um erro com o cadastro');
+          redirect(base_url('admin/Dashboard/cadastroCliente'));
         }
-        redirect(base_url('admin/Dashboard/cadastroCliente'));
       }
-    }
 
-    $dados['clientes'] = $this->dash->getAllClientes()->result();
+      $dados['clientes'] = $this->dash->getAllClientes()->result();
+
+      }
+
+
 
 
     $this->load->view('templates/header');

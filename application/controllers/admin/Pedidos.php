@@ -25,12 +25,8 @@ class Pedidos extends CI_Controller {
         foreach($this->session->userdata('teste') as $id){
           if($id->idprodutos != $produto){
             $existe = FALSE;
-            var_dump($existe);
-            echo '<br/>';
           }else{
             $existe = TRUE;
-            var_dump($existe);
-            echo '<br/>';
             break;
           }
         }
@@ -41,36 +37,41 @@ class Pedidos extends CI_Controller {
         }
       }
 
-      var_dump($this->session->userdata('teste'));
+      //var_dump($this->session->userdata('teste'));
     }
 
     if($this->input->post()){
+      //var_dump($this->input->post('quant'));
+      // var_dump($this->input->post('idprodutos'));
+      // die();
 
       $this->form_validation->set_message('required', 'O campo %s é obrigatório');
 
-      $this->form_validation->set_rules('nome', 'Nome do Cliente', 'trim|required');
+      $this->form_validation->set_rules('nome_cliente', 'Nome do Cliente', 'trim|required');
       $this->form_validation->set_rules('endereco', 'Endereço', 'trim|required');
       $this->form_validation->set_rules('telefone', 'Telefone', 'trim|required');
       $this->form_validation->set_rules('email', 'E-mail', 'trim|required');
 
-      // if($this->form_validation->run()==TRUE){
-      //   if($this->pedidos->pedidoFinalizado()){
-      //     $this->session->set_flashdata('pedidoOk', 'Pedido Finalizado com Sucesso');
-      //     redirect('admin/Pedidos/criarPedidoA');
-      //   }else{
-      //     $this->session->set_flashdata('pedidoFail', 'Ocorreu um erro ao finalizar o pedido');
-      //     redirect('admin/Pedidos/criarPedidoA');
-      //   }
-      // }
+      if($this->form_validation->run()==TRUE){
+
+        $dados['pedidos_a'] = elements(array('nome_cliente', 'endereco', 'telefone', 'email'), $this->input->post());
+        $dados['itens_quantidade'] = $this->input->post('quantidade');
+        $dados['itens_idProduto'] = $this->input->post('Produtos_idProdutos');
+        //var_dump($this->input->post('Produtos_idProdutos'));
+
+        if($this->pedidos->pedidoFinalizado($dados)){
+          $this->session->set_flashdata('pedidoOk', 'Pedido Finalizado com Sucesso');
+          $this->session->unset_userdata('teste');
+          redirect('admin/Pedidos/criarPedidoA');
+        }else{
+          $this->session->set_flashdata('pedidoFail', 'Ocorreu um erro ao finalizar o pedido');
+          redirect('admin/Pedidos/criarPedidoA');
+        }
+      }
     }
 
-      // foreach ($this->data['pedido'] as $linha) {
-      //   array_push($produtos['carrinho'], $this->dash->getProductById($linha)->row());
-      //   var_dump($produtos['carrinho']);
-      //   die();
-      // }
-
-    var_dump($this->session->userdata('teste'));
+    $this->data['pedido'] = $this->session->userdata('teste');
+    //var_dump($this->session->userdata('teste'));
 
     $this->load->view('templates/header');
     $this->load->view('templates/menuUpLeft');
@@ -79,37 +80,45 @@ class Pedidos extends CI_Controller {
 
   }
 
+  public function verPedidos(){
+
+    $dados['pedidos'] = $this->pedidos->getPedidos();
+
+    $this->load->view('templates/header');
+    $this->load->view('templates/menuUpLeft');
+    $this->load->view('myminisweets/admin/pedidos/gerenciarPedidos', $dados);
+    $this->load->view('templates/footer');
+
+  }
+
+  public function verItens($idpedido){
+
+    $dados['itens'] = $this->pedidos->getItens($idpedido);
+    foreach ($dados['itens'] as $keyProduto => $valueProduto) {
+        $dados['ids'] = $valueProduto->produtos_idprodutos;
+    }
+
+    //$this->pedidos->getNomeItem($dados);
+
+    $this->load->view('templates/header');
+    $this->load->view('templates/menuUpLeft');
+    $this->load->view('myminisweets/admin/pedidos/verItens', $dados);
+    $this->load->view('templates/footer');
+  }
+
   public function pesquisarProdutoJson(){
       $nomeProduto = $this->input->post('busca');
       echo json_encode($this->pedidos->getProductLike($nomeProduto)->result());
 
   }
 
-  public function addProduto($produto){
-
-    if($this->session->userdata('teste') == NULL){
-      array_push($this->data['pedido'] , $produto);
-      $this->session->set_userdata('teste', $this->data['pedido']);
-    }else{
-      $this->data['pedido'] = $this->session->userdata('teste');
-      array_push($this->data['pedido'] , $produto);
-      $this->session->set_userdata('teste', $this->data['pedido']);
-    }
-
-    var_dump($this->session->userdata('teste'));
-    //$this->data['pedido'] = $this->dash->getProductById($produto)->row();
-
-
-    $this->load->view('templates/header');
-    $this->load->view('templates/menuUpLeft');
-    $this->load->view('myminisweets/admin/pedidos/criarPedido');
-    $this->load->view('templates/footer');
-
-  }
-
   public function destroySession(){
     $this->session->sess_destroy();
     echo "ok";
+  }
+
+  public function closeSession(){
+
   }
 
   public function gerenciarPedidos(){

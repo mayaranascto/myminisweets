@@ -11,7 +11,7 @@
 
       $(document).on("click", ".show", function () {
           $(".ui.modal").modal("setting", {
-              closable: false,
+              closable: true,
               onApprove: function () {
                   return false;
               }
@@ -47,7 +47,7 @@
             html += '<tr><td colspan="2">Não existe dados a serem mostrados</td></tr>';
           }else{
             for(var i = 0; i< produtos.length; i++){
-              html += '<tr><td>' + produtos[i].idprodutos + '</td><td>' + produtos[i].nome_produto + '</td><td>' + produtos[i].preco + '</td><td><a href="<?php echo base_url("admin/Pedidos/criarPedidoA/"); ?>/'+produtos[i].idprodutos+'"><button>Add</button></a></td></tr>';
+              html += '<tr><td>' + produtos[i].idprodutos + '</td><td>' + produtos[i].nome_produto + '</td><td>' + produtos[i].preco + '</td><td><a href="<?php echo base_url("admin/Pedidos/criarPedidoA/"); ?>/'+produtos[i].idprodutos+'"><button class="purple ui button"><i class="white add circle icon"></i></button></a></td></tr>';
             }
           }
           $('#table_busca_produto tr').not(':first').remove();
